@@ -36,25 +36,25 @@ struct TestPass: PassInfoMixin<TestPass> {
   // corresponding pass manager (to be queried if need be)
   PreservedAnalyses run(Function &F, FunctionAnalysisManager &) {
 
-  errs() << "Function Name: " << F.getName() << "\n";
+	errs() << "Function Name: " << F.getName() << "\n";
 	errs() << "Number of Arguments: " << F.arg_size() << "\n";
 
-  int FunctionCalls = 0;
+	int FunctionCalls = 0;
 	int BasicBlocks = 0;
 	int Instructions = 0;
 
 	for (auto InitBB = F.begin(); InitBB != F.end(); ++InitBB)
 	{
-    BasicBlocks++;
+    		BasicBlocks++;
 		for (auto InitInstruction = InitBB->begin(); InitInstruction != InitBB->end(); ++InitInstruction)
-    {
+    		{
 			Instructions++;
-      if (CallInst *call_inst = dyn_cast<CallInst>(&F))
-        FunctionCalls++;
-    }
-	}
+      			if (CallInst *call_inst = dyn_cast<CallInst>(&F))
+        			FunctionCalls++;
+    	}
+		}
 
-  errs() << "Number of Function Calls: " << FunctionCalls << "\n";
+	errs() << "Number of Function Calls: " << FunctionCalls << "\n";
 	errs() << "Number of Basic Blocks: " << BasicBlocks << "\n";
 	errs() << "Number of Instructions: " << Instructions << "\n";
 
